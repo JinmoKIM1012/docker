@@ -13,19 +13,25 @@ alias mamba="micromamba"
 ##### Zsh/Oh-my-Zsh Configuration
 export ZSH="$HOME/.oh-my-zsh"
 export SHELL="/bin/zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(git sudo zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
+ZSH_THEME="agnoster"
+plugins=(
+	git 
+	sudo 
+	zsh-autosuggestions 
+	zsh-syntax-highlighting 
+	zsh-completions
+)
 
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_last"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user dir vcs status)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-POWERLEVEL9K_STATUS_OK=false
-POWERLEVEL9K_STATUS_CROSS=true
 
 source $ZSH/oh-my-zsh.sh
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ##### Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+prompt_context() {
+    if [[ "$USER" != "$DEFAULT_USER" || -n "SSH_CLIENT" ]]; then
+		prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+	fi
+}
