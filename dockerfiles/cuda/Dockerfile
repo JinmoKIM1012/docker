@@ -42,12 +42,13 @@ RUN sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions && \
   git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting && \
   git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions && \
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
-
+  git clone https://github.com/wting/autojump.git && \
+  git clone https://github.com/peterhurford/up.zsh ~/.oh-my-zsh/custom/plugins/up && \
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k && \
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Copy configuration files to user's home directory
 RUN mkdir -p /home/$USER/.config/nvim
 COPY --chown=$USER:$USER dotfiles/.tmux.conf /home/$USER/
-COPY --chown=$USER:$USER dotfiles/.p10k.zsh /home/$USER/
 COPY --chown=$USER:$USER dotfiles/.zshrc /home/$USER/
 COPY --chown=$USER:$USER dotfiles/nvim /home/$USER/.config/nvim/
 
